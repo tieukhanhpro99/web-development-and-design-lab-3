@@ -1,0 +1,55 @@
+name: Deploy Lab 3 to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            exercise4/26560028/package-lock.json
+            exercise5/my-first-react-app/package-lock.json
+            homework2/package-lock.json
+      - uses: actions/configure-pages@v5
+      - name: Assemble Lab 3 site
+        run: |
+          mkdir _site
+          cp index.html LAB3_Nguyen_Nam_Khanh_26560028.pdf _site/
+          cp -R exercise1 exercise2 exercise3 homework1 _site/
+
+          npm ci --prefix exercise4/26560028
+          npm run build --prefix exercise4/26560028 -- --base=./
+          mv exercise4/26560028/dist _site/exercise4
+
+          npm ci --prefix exercise5/my-first-react-app
+          npm run build --prefix exercise5/my-first-react-app -- --base=./
+          mv exercise5/my-first-react-app/dist _site/exercise5
+
+          npm ci --prefix homework2
+          npm run build --prefix homework2 -- --base=./
+          mv homework2/dist _site/homework2
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - uses: actions/deploy-pages@v4
+        id: deployment

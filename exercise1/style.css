@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+    transition: 0.3s;
+}
+
+main {
+    max-width: 500px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+button {
+    padding: 12px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Dark mode */
+body.dark-mode {
+    background-color: #1e1e2e;
+    color: white;
+}
+
+body.dark-mode button {
+    background-color: #444;
+    color: white;
+}

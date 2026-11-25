@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Góc Bàn | Văn phòng phẩm</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./app.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a class="brand" href="./">Góc Bàn</a>
+            <div class="cart" aria-live="polite" aria-atomic="true">
+                <span>Giỏ hàng</span>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Văn phòng phẩm</h1>
+
+        <div class="catalog-controls">
+            <div id="category-filters" role="group" aria-label="Lọc theo danh mục"></div>
+            <label class="search">
+                <span>Tìm sản phẩm</span>
+                <input id="product-search" type="search" placeholder="Nhập tên sản phẩm">
+            </label>
+        </div>
+
+        <div class="cart-controls">
+            <p>Tổng giỏ hàng <strong id="cart-total">0 ₫</strong></p>
+            <button id="clear-cart" type="button" disabled>Xóa giỏ hàng</button>
+        </div>
+
+        <p id="empty-results" role="status" hidden>Không tìm thấy sản phẩm phù hợp.</p>
+        <div id="product-grid" class="product-grid"></div>
+    </main>
+</body>
+</html>
